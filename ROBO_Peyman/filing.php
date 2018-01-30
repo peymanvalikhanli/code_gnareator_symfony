@@ -94,7 +94,7 @@ class filing
                 return 0;
             }
         } catch (Exception $e) {
-            //print_r($e);
+            print_r($e);
             return -1;
         }
     }

@@ -9,7 +9,8 @@
 require_once 'filing.php';
 require_once 'project.php';
 require_once 'init_directory.php';
-
+require_once 'database/data.php';
+require_once 'controller_creator.php';
 //_______________________________________________________
 
 echo "hi peyman <br>";
@@ -51,9 +52,23 @@ if (isset($_REQUEST["init_dir"])) {
 
 //____________ create entities model
 if (isset($_REQUEST["create_entities"])){
-    echo "statr Entity creator ... <br>";
-
+    echo "<br>statr Entity creator ... <br>";
+//TODO: peyman
     echo"<br>";
     echo "finish Entity creator";
 }
 
+//______________ create controllers
+
+if(isset($_REQUEST["create_controller"])){
+    echo "<br>start controllers creator";
+    echo "<br>";
+
+    $Entities = data::get_tables();
+    for($entity_index = 0 ; $entity_index<count($Entities);$entity_index++) {
+        controller_creator(project::$name."/src/AppBundle/Controller", $Entities[$entity_index]["table_name"]);
+    }
+    echo "<br>";
+    echo"finish controllers creator";
+
+}
